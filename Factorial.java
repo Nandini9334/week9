@@ -1,6 +1,6 @@
 public class Factorial{
   public static long compute(int n){
-    if(n<o){
+    if(n<0){
       throw new illegalArgumentException("factorial of not defined");
     }
     long r=1;
@@ -9,7 +9,7 @@ public class Factorial{
     }
     return r;
   }
-  public static void main(string[] args){
+  public static void main(String[] args){
     int n=5;
     System.out.print("factorial of "+n+" "+compute(n));
 }
