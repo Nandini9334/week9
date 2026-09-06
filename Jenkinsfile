@@ -1,32 +1,21 @@
 pipeline{
   agent any
     stages{
-      stage('compile'){
+      stage('Build'){
         steps{
-          bat' javac Factorial.java TestFactorial.java'
+          echo'build image'
+          bat'docker build -t myapp'
         }
       }
-       stage('Test'){
-        steps{
-          bat' java TestFactorial.java'
-        }
-      }
+      
        stage('Run'){
         steps{
-          bat' java Factorial'
+          echo'run the container'
+          bat' docker rm -f mycontainer || exit 0'
+          bat'docker run -d -p 5000:5000 --name mycontainer myapp'
         }
       }
-       stage('Package JAR'){
-        steps{
-          bat' jar cfm factorial.jar manifest.txt Factorial.class'
-        }
-      }
-       stage('Archive JAR'){
-        steps{
-          archiveArtifacts artifacts: 'factorial.jar '
-        }
-      }
-    }
+    }   
   post{
     success{
       echo'build successfully'
