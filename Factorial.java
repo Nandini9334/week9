@@ -10,7 +10,7 @@ public class Factorial{
     return r;
   }
   public static void main(string[] args){
-    int n=5
+    int n=5;
     System.out.print("factorial of "+n+" "+compute(n));
 }
 }
