@@ -4,7 +4,7 @@ public class TestFactorial{
     if(Factorial.compute(5)!=120){
       throw new AssertionError("test passed for 5");
     } 
-     if(Factorial.comppue(0)!=1){
+     if(Factorial.compute(0)!=1){
       throw new AssertionError("test passed for 0");
         }
       System.out.println("All tests are passed");
