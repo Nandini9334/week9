@@ -10,7 +10,7 @@ public class TestFactorial{
       System.out.println("All tests are passed");
     }
       catch(AssertionError e){
-        System.out.println(e.getmessage());
+        System.out.println(e.getMessage());
       }
   }
 }
