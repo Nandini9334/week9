@@ -23,7 +23,7 @@ pipeline{
       }
        stage('Archive JAR'){
         steps{
-          bat' archiveArtifacts artifacts: factorial.jar '
+          archiveArtifacts artifacts: 'factorial.jar '
         }
       }
     }
