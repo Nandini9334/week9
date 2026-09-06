@@ -1,7 +1,7 @@
 public class Factorial{
   public static long compute(int n){
     if(n<0){
-      throw new illegalArgumentException("factorial of not defined");
+      throw new IllegalArgumentException("factorial of not defined");
     }
     long r=1;
     for(int i=2;i<=n;i++){
