@@ -7,7 +7,7 @@ spec:
     app: kubedemoapp
   ports:
     - protocol: TCP
-      port: 5000
+      port: 5051
       targetPort: 5050
       nodePort: 30080
   type: NodePort
