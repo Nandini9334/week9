@@ -1,27 +1,41 @@
-pipeline{
-  agent any
-    stages{
-      stage('Build'){
-        steps{
-          echo'build image'
-          bat'docker build -t myapp'
+pipeline {
+    agent any
+    stages
+    {
+        stage('Build Docker Image') {
+            steps {
+                echo "Build Docker Image"
+                bat "docker build -t kubdemoapp:v1 ."
+            }
         }
-      }
-      
-       stage('Run'){
-        steps{
-          echo'run the container'
-          bat' docker rm -f mycontainer || exit 0'
-          bat'docker run -d -p 5000:5000 --name mycontainer myapp'
+        stage('Docker Login') {
+            steps {
+                  bat 'docker login -u nandini9334 -p dhinnu@18'
+                }
+            }
+        stage('push Docker Image to Docker Hub') {
+            steps {
+                echo "push Docker Image to Docker Hub"
+                bat "docker tag kubdemoapp:v1 nandini9334/week8:kubeimage1"               
+                    
+                bat "docker push nandini9334/week8:kubeimage1"
+                
+            }
         }
-      }
-    }   
-  post{
-    success{
-      echo'build successfully'
+        stage('Deploy to Kubernetes') { 
+            steps { 
+                    // apply deployment & service 
+                    bat 'kubectl apply -f deployment.yaml --validate=false' 
+                    bat 'kubectl apply -f service.yaml' 
+            } 
+        }
     }
-    failure{
-      echo'build failed'
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Please check the logs.'
+        }
     }
-  }
 }
